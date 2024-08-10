@@ -32,8 +32,7 @@ const Experience = () => {
     // useHelper(directionalLight, DirectionalLightHelper, 1, 'red')
     // useHelper(pointLight, PointLightHelper, 1, 'red')
 
-    const { intensity, positionX, positionY, positionZ, } = useControls({ 
-        intensity: {value:3.3, min:0, max:10, step:0.1}, 
+    const { positionX, positionY, positionZ, } = useControls({
         positionX: {value:1.3, min:-10, max:10, step:0.1},
         positionY: {value:1.0, min:-10, max:10, step:0.1},
         positionZ: {value:-0.9, min:-10, max:10, step:0.1},

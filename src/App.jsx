@@ -1,6 +1,7 @@
 import { Canvas } from "@react-three/fiber"
 import Experience from "./Experience"
 import { MathUtils } from "three"
+import { Leva } from "leva"
 
 
 function App() {
@@ -16,6 +17,7 @@ function App() {
 				<color args={['black']} attach={'background'}/>
 				<Experience/>
 			</Canvas>
+			<Leva collapsed/>
 		</>
 	)
 }
