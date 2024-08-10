@@ -1,0 +1,59 @@
+import { Box, OrbitControls, useHelper } from '@react-three/drei'
+import { Classroom } from './Classroom'
+import { useFrame, useThree } from '@react-three/fiber'
+import { useRef } from 'react'
+import { DirectionalLightHelper, PointLightHelper } from 'three'
+import { useControls } from 'leva'
+import { easing } from 'maath'
+
+const Experience = () => {
+
+    const directionalLight = useRef()
+    const pointLight = useRef()
+    const context = useThree()
+    console.log(context)
+    const flicker = () =>{
+        if(Math.random()>0.1)
+        {
+            return 5
+        }
+        else return 1
+    }
+
+    useFrame(( state, delta)=>
+    {
+        // console.log(state.clock.getElapsedTime())
+        const rotationFactor = 0.2
+        easing.dampE(state.camera.rotation, [state.pointer.y * rotationFactor, -state.pointer.x * rotationFactor, 0], 0.25, delta)
+        // easing.damp3(pointLight.current.position, [Math.sin(state.clock.getElapsedTime()), 1, -1.5 +(Math.cos(state.clock.getElapsedTime()))], 0.25, delta) 
+        pointLight.current.intensity = flicker()
+    })
+
+    // useHelper(directionalLight, DirectionalLightHelper, 1, 'red')
+    // useHelper(pointLight, PointLightHelper, 1, 'red')
+
+    const { intensity, positionX, positionY, positionZ, } = useControls({ 
+        intensity: {value:3.3, min:0, max:10, step:0.1}, 
+        positionX: {value:-0.1, min:-10, max:10, step:0.1},
+        positionY: {value:1.4, min:-10, max:10, step:0.1},
+        positionZ: {value:-2.2, min:-10, max:10, step:0.1},
+    })
+
+    const {positionCubeX, positionCubeY, positionCubeZ, } = useControls({  
+        positionCubeX: {value:0, min:-10, max:10, step:0.1},
+        positionCubeY: {value:0, min:-10, max:10, step:0.1},
+        positionCubeZ: {value:0, min:-10, max:10, step:0.1},
+    })
+    return (
+        <>
+            {/* <OrbitControls/> */}
+            {/* <ambientLight intensity={0.5}/> */}
+            {/* <directionalLight ref={directionalLight} intensity={intensity} position={[positionX,positionY,positionZ]} color={'red'}/> */}
+            <pointLight ref={pointLight} position={[positionX,positionY,positionZ]} color={'red'}/>
+            <Box scale={0.1} position={[positionCubeX, positionCubeY, positionCubeZ]}/>
+            <Classroom scale={[50,50,50]} rotation={[0,-Math.PI/2,0]}/>
+        </>
+    )
+}
+
+export default Experience
