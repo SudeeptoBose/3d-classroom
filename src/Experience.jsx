@@ -11,7 +11,7 @@ const Experience = () => {
     const directionalLight = useRef()
     const pointLight = useRef()
     const context = useThree()
-    console.log(context)
+    console.log(context.viewport)
     const flicker = () =>{
         if(Math.random()>0.1)
         {
@@ -34,23 +34,28 @@ const Experience = () => {
 
     const { intensity, positionX, positionY, positionZ, } = useControls({ 
         intensity: {value:3.3, min:0, max:10, step:0.1}, 
-        positionX: {value:-0.1, min:-10, max:10, step:0.1},
-        positionY: {value:1.4, min:-10, max:10, step:0.1},
-        positionZ: {value:-2.2, min:-10, max:10, step:0.1},
+        positionX: {value:1.3, min:-10, max:10, step:0.1},
+        positionY: {value:1.0, min:-10, max:10, step:0.1},
+        positionZ: {value:-0.9, min:-10, max:10, step:0.1},
     })
 
     const {positionCubeX, positionCubeY, positionCubeZ, } = useControls({  
-        positionCubeX: {value:0, min:-10, max:10, step:0.1},
-        positionCubeY: {value:0, min:-10, max:10, step:0.1},
-        positionCubeZ: {value:0, min:-10, max:10, step:0.1},
+        positionCubeX: {value:0.4, min:-10, max:10, step:0.1},
+        positionCubeY: {value:1.3, min:-10, max:10, step:0.1},
+        positionCubeZ: {value:-2.8, min:-10, max:10, step:0.1},
     })
+
+    const randomAlert = () =>
+    {
+        alert('Hey Noushin, time I go to bed. Goodnight')
+    }
     return (
         <>
             {/* <OrbitControls/> */}
             {/* <ambientLight intensity={0.5}/> */}
             {/* <directionalLight ref={directionalLight} intensity={intensity} position={[positionX,positionY,positionZ]} color={'red'}/> */}
             <pointLight ref={pointLight} position={[positionX,positionY,positionZ]} color={'red'}/>
-            <Box scale={0.1} position={[positionCubeX, positionCubeY, positionCubeZ]}/>
+            <Box onClick={randomAlert} scale={[2,1,0.5]} position={[positionCubeX, positionCubeY, positionCubeZ]} visible={false}/>
             <Classroom scale={[50,50,50]} rotation={[0,-Math.PI/2,0]}/>
         </>
     )
