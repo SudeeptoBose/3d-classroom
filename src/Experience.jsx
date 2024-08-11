@@ -46,7 +46,7 @@ const Experience = () => {
 
     const randomAlert = () =>
     {
-        alert('Hey Noushin, time I go to bed. Goodnight')
+        alert('BOOOO!')
     }
     return (
         <>
