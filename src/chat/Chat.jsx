@@ -6,6 +6,7 @@ const Chat = () => {
 
     const [userInput, setUserInput] = useState("")
     const [botResponse, setBotResponse] = useState("")
+    const [chatHistory, setChatHistory] = useState([])
     const [showInput, setShowInput] = useState(false)
     const [isLoading, setIsLoading] = useState(false)
 
@@ -14,7 +15,7 @@ const Chat = () => {
     }
 
     const toggleInput = () => {
-        showInput(!setShowInput)
+        setShowInput(!showInput)
         setIsLoading(true)
     }
 
@@ -34,12 +35,18 @@ const Chat = () => {
                 }
             )
             const generatedText = response.data.response
-            setBotResponse(generatedText)
+            setChatHistory([...chatHistory, {user: userInput, bot: generatedText}])
+            setUserInput("")
         } catch (error) {
             console.error("Error", error)
         }   
 
         setIsLoading(false)
+    }
+
+    const handleClear = () => {
+        setChatHistory([])
+        setUserInput("")
     }
     
 
