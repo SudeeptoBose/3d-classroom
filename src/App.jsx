@@ -2,6 +2,7 @@ import { Canvas } from "@react-three/fiber"
 import Experience from "./Experience"
 import { MathUtils } from "three"
 import { Leva } from "leva"
+import Chat from "./chat/Chat"
 
 
 function App() {
@@ -18,6 +19,7 @@ function App() {
 				<Experience/>
 			</Canvas>
 			<Leva collapsed/>
+			<Chat/>
 		</>
 	)
 }

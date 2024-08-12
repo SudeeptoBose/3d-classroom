@@ -46,7 +46,7 @@ const Experience = () => {
 
     const randomAlert = () =>
     {
-        alert('BOOOO!')
+        alert('Hi Arpita!')
     }
     return (
         <>
