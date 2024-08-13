@@ -51,18 +51,18 @@ const Chat = () => {
     
 
     return (
-        <div className="chat-component">
-            <button className="chat-button" onClick={toggleInput}>
+        <div className="absolute px-7 top-36 h-1/2 w-96 bg-red-700 rounded-tr-3xl rounded-br-3xl">
+            <button className="mt-2 p-2 rounded-md bg-slate-100" onClick={toggleInput}>
                 {showInput ? 'Close chat' : 'Ask a question'}
             </button>
             {showInput && (
-                <form className="chat-form" onSubmit={handleSubmit}>
+                <form className="chat-form mt-2" onSubmit={handleSubmit}>
                     <input
                         type="text"
                         value={userInput}
                         onChange={handleUserInput}
                         placeholder="Type your question"
-                        className="chat-input"
+                        className="chat-input p-2"
                     />
                     <button type="submit" disabled={isLoading} className="submit-button">
                         {isLoading ? "Sending.." : "Send"}
