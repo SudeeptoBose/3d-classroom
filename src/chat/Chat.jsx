@@ -10,13 +10,22 @@ const Chat = () => {
     const [showInput, setShowInput] = useState(false)
     const [isLoading, setIsLoading] = useState(false)
 
+    const gyroscope = new Gyroscope()
+    let x
+    gyroscope.start()
+    gyroscope.onreading = () =>
+    {
+        x = gyroscope.x
+    }
+    console.log(gyroscope)
+
     const handleUserInput = (event) => {
         setUserInput(event.target.value)
     }
 
     const toggleInput = () => {
         setShowInput(!showInput)
-        setIsLoading(true)
+        setIsLoading(false)
     }
 
     const handleSubmit = async (event) => {
@@ -36,6 +45,7 @@ const Chat = () => {
             )
             const generatedText = response.data.response
             setChatHistory([...chatHistory, {user: userInput, bot: generatedText}])
+            setBotResponse(generatedText)
             setUserInput("")
         } catch (error) {
             console.error("Error", error)
@@ -52,6 +62,11 @@ const Chat = () => {
 
     return (
         <div className="absolute p-4 top-36 h-1/2 w-96 bg-red-700 rounded-br-3xl">
+            <ul className="text-white">
+                <li>1 {x}</li>
+                <li>2 {gyroscope.y}</li>
+                <li>3 {gyroscope.z}</li>
+            </ul>
             <button className="mt-2 p-2 rounded-md bg-slate-100" onClick={toggleInput}>
                 {showInput ? 'Close chat' : 'Ask a question'}
             </button>
