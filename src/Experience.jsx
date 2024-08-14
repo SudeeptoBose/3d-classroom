@@ -62,14 +62,14 @@ const Experience = () => {
         alert('BOOOOO!')
     }
 
-    const text = 'Room'
+    const text = 'Red Room'
 
     return (
         <>
             {/* <OrbitControls/> */}
             {/* <ambientLight intensity={0.5}/> */}
             {/* <directionalLight ref={directionalLight} intensity={intensity} position={[positionX,positionY,positionZ]} color={'red'}/> */}
-            <Text position={[0, 1, -1]}>{text}</Text>
+            <Text scale={0.5} color={'crimson'} position={[0, 1, -1]}>{text}</Text>
             <pointLight ref={pointLight} position={[positionX,positionY,positionZ]} color={'red'}/>
             <Box onClick={randomAlert} scale={[2,1,0.5]} position={[positionCubeX, positionCubeY, positionCubeZ]} visible={false}/>
             <Classroom scale={[50,50,50]} rotation={[0,-Math.PI/2,0]}/>
