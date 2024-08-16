@@ -11,12 +11,12 @@ const Experience = () => {
     const [deviceType, setDeviceType] = useState('desktop')
     const directionalLight = useRef()
     const pointLight = useRef()
-    const context = useThree()
+    const {context, viewport} = useThree()
 
     // const gyroscope = new Gyroscope()
 
-    // console.log(gyroscope)
-
+    // console.log(viewport)
+    const scalingFactor = viewport.width<2? 0.5 : 1
     const flicker = () =>{
         if(Math.random()>0.1)
         {
@@ -30,14 +30,7 @@ const Experience = () => {
     {
         // console.log(state.viewport)
         const rotationFactor = 0.2
-        if(state.viewport.width> 2.5)
-        {
-          easing.dampE(state.camera.rotation, [state.pointer.y * rotationFactor, -state.pointer.x * rotationFactor, 0], 0.25, delta)
-        } else if( state.viewport.width < 2.5)
-        {
-          easing.dampE(state.camera.rotation, [state.pointer.y * rotationFactor, -state.pointer.x * rotationFactor, 0], 0.25, delta)
-        }
-        
+        easing.dampE(state.camera.rotation, [state.pointer.y * rotationFactor, -state.pointer.x * rotationFactor, 0], 0.25, delta)
         // easing.damp3(pointLight.current.position, [Math.sin(state.clock.getElapsedTime()), 1, -1.5 +(Math.cos(state.clock.getElapsedTime()))], 0.25, delta) 
         pointLight.current.intensity = flicker()
     })
@@ -45,17 +38,17 @@ const Experience = () => {
     // useHelper(directionalLight, DirectionalLightHelper, 1, 'red')
     // useHelper(pointLight, PointLightHelper, 1, 'red')
 
-    const { positionX, positionY, positionZ, } = useControls({
-        positionX: {value:1.3, min:-10, max:10, step:0.1},
-        positionY: {value:1.0, min:-10, max:10, step:0.1},
-        positionZ: {value:-0.9, min:-10, max:10, step:0.1},
-    })
+    // const { positionX, positionY, positionZ, } = useControls({
+    //     positionX: {value: scalingFactor * 1.3, min:-10, max:10, step:0.1},
+    //     positionY: {value: scalingFactor * 1.0, min:-10, max:10, step:0.1},
+    //     positionZ: {value: scalingFactor * -0.9, min:-10, max:10, step:0.1},
+    // })
 
-    const {positionCubeX, positionCubeY, positionCubeZ, } = useControls({  
-        positionCubeX: {value:0.4, min:-10, max:10, step:0.1},
-        positionCubeY: {value:1.3, min:-10, max:10, step:0.1},
-        positionCubeZ: {value:-2.8, min:-10, max:10, step:0.1},
-    })
+    // const {positionCubeX, positionCubeY, positionCubeZ, } = useControls({  
+    //     positionCubeX: {value: scalingFactor * 0.4, min:-10, max:10, step:0.1},
+    //     positionCubeY: {value: scalingFactor * 1.3, min:-10, max:10, step:0.1},
+    //     positionCubeZ: {value: scalingFactor * -2.8, min:-10, max:10, step:0.1},
+    // })
 
     const randomAlert = () =>
     {
@@ -66,15 +59,12 @@ const Experience = () => {
 
     return (
         <>
-            {/* <OrbitControls/> */}
-            {/* <ambientLight intensity={0.5}/> */}
-            {/* <directionalLight ref={directionalLight} intensity={intensity} position={[positionX,positionY,positionZ]} color={'red'}/> */}
             <Float speed={2} floatIntensity={0.8}>
-                <Text scale={0.5} font='/who asks satan.ttf' fontSize={0.85} color={'#780606'} rotation={[0,MathUtils.degToRad(-45),0]} position={[0.5, 1, 0]}>{text}</Text>
+                <Text scale={0.5 * scalingFactor} font='/who asks satan.ttf' fontSize={0.85} color={'#780606'} rotation={[0,MathUtils.degToRad(-45),0]} position={ scalingFactor<1?[0, 1.3,0]: [0.5 , 1 , 0]}>{text}</Text>
             </Float>
-            <pointLight ref={pointLight} position={[positionX,positionY,positionZ]} color={'red'}/>
-            <Box onClick={randomAlert} scale={[2,1,0.5]} position={[positionCubeX, positionCubeY, positionCubeZ]} visible={false}/>
-            <Classroom scale={[50,50,50]} rotation={[0,-Math.PI/2,0]}/>
+            <pointLight ref={pointLight} position={[1.3,1.0,-0.9]} color={'red'}/>
+            <Box onClick={randomAlert} scale={[2 * scalingFactor,1 * scalingFactor,0.5 * scalingFactor]} position={scalingFactor<1?[0.2,1.3,-1.4 ]: [0.4, 1.3, -2.8]} visible={false}/>
+            <Classroom scale={[50 * scalingFactor,50 * scalingFactor,50 * scalingFactor]} rotation={[0,-Math.PI/2,0]} position={scalingFactor<1? [0,0.7,0 ]: [0,0,0]}/>
         </>
     )
 }

@@ -6,6 +6,7 @@ const Chatbot = () => {
   const [input, setInput] = useState("");
   const [streaming, setStreaming] = useState("");
   const inferenceRef = useRef(null);
+  const chatContainerRef = useRef(null);
 
   useEffect(() => {
     const apiKey = import.meta.env.VITE_HUGGINGFACE_API_KEY;
@@ -15,6 +16,12 @@ const Chatbot = () => {
     }
     inferenceRef.current = new HfInference(apiKey);
   }, []);
+
+  useEffect(() => {
+    if (chatContainerRef.current) {
+      chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight;
+    }
+  }, [messages, streaming])
 
   const sendMessage = async () => {
     if (input.trim() === "") return;
@@ -58,20 +65,16 @@ const Chatbot = () => {
   };
 
   return (
-    <div className="w-1/4 h-screen bg-red-900 absolute top-0 p-4">
-      <div className="mb-4 space-y-2">
+    <div className="fixed bottom-0 left-0 right-0 bg-red-900 w-full md:w-1/4 h-1/3 md:h-screen md:top-0 md:right-auto p-4 flex flex-col">
+      <div 
+        ref={chatContainerRef}
+        className="flex-grow overflow-y-auto mb-4 space-y-2"
+      >
         {messages.map((message, index) => (
-          <div
-            key={index}
-            className={message.role === "user" ? "text-right" : "text-left"}
-          >
-            <span
-              className={`inline-block p-2 rounded-lg ${
-                message.role === "user"
-                  ? "bg-gray-950 text-white"
-                  : "bg-gray-300 text-black"
-              }`}
-            >
+          <div key={index} className={message.role === 'user' ? 'text-right' : 'text-left'}>
+            <span className={`inline-block p-2 rounded-lg ${
+              message.role === 'user' ? 'bg-gray-950 text-white' : 'bg-gray-300 text-black'
+            }`}>
               {message.content}
             </span>
           </div>
@@ -84,12 +87,12 @@ const Chatbot = () => {
           </div>
         )}
       </div>
-      <div className="absolute bottom-4 left-4 right-4">
+      <div className="mt-auto">
         <input
           type="text"
           value={input}
           onChange={(e) => setInput(e.target.value)}
-          onKeyUp={(e) => e.key === "Enter" && sendMessage()}
+          onKeyUp={(e) => e.key === 'Enter' && sendMessage()}
           className="w-full p-2 border rounded-lg"
           placeholder="Type your message..."
         />
