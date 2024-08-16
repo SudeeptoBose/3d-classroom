@@ -1,8 +1,8 @@
-import { Box, OrbitControls, Text, useHelper } from '@react-three/drei'
+import { Box, Float, OrbitControls, Text, useHelper } from '@react-three/drei'
 import { Classroom } from './Classroom'
 import { useFrame, useThree } from '@react-three/fiber'
 import { useEffect, useRef, useState } from 'react'
-import { DirectionalLightHelper, PointLightHelper } from 'three'
+import { DirectionalLightHelper, MathUtils, PointLightHelper } from 'three'
 import { useControls } from 'leva'
 import { easing } from 'maath'
 
@@ -62,14 +62,17 @@ const Experience = () => {
         alert('BOOOOO!')
     }
 
-    const text = 'Red Room'
+    const fontFamily = "Rubik Mono One"
+    const text = 'Error 404'
 
     return (
         <>
             {/* <OrbitControls/> */}
             {/* <ambientLight intensity={0.5}/> */}
             {/* <directionalLight ref={directionalLight} intensity={intensity} position={[positionX,positionY,positionZ]} color={'red'}/> */}
-            <Text scale={0.5} color={'crimson'} position={[0, 1, -1]}>{text}</Text>
+            <Float speed={2} floatIntensity={0.8}>
+                <Text scale={0.5} font='/who asks satan.ttf' fontSize={0.85} color={'#780606'} rotation={[0,MathUtils.degToRad(-45),0]} position={[0.5, 1, 0]}>{text}</Text>
+            </Float>
             <pointLight ref={pointLight} position={[positionX,positionY,positionZ]} color={'red'}/>
             <Box onClick={randomAlert} scale={[2,1,0.5]} position={[positionCubeX, positionCubeY, positionCubeZ]} visible={false}/>
             <Classroom scale={[50,50,50]} rotation={[0,-Math.PI/2,0]}/>

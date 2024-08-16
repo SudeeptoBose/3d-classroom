@@ -3,6 +3,7 @@ import Experience from "./Experience"
 import { MathUtils } from "three"
 import { Leva } from "leva"
 import Chat from "./chat/Chat"
+import Chatbot from "./chat/Chatbot"
 // import GyroscopeComponent from "./test/GyroscopeComponent"
 
 
@@ -20,7 +21,8 @@ function App() {
 				<Experience/>
 			</Canvas>
 			<Leva collapsed/>
-			<Chat/>
+			<Chatbot/>
+			{/* <Chat/> */}
 		</>
 	)
 }

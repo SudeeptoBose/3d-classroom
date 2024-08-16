@@ -2,6 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
+
+/* @font-face {
+    font-family: "RoboMono";
+    src: url('./RubikMonoOne-Regular.ttf');
+} */
+
 #root
 {
     width: 100vw;
