@@ -62,7 +62,6 @@ const Experience = () => {
         alert('BOOOOO!')
     }
 
-    const fontFamily = "Rubik Mono One"
     const text = 'Error 404'
 
     return (
