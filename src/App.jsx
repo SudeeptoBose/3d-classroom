@@ -3,6 +3,7 @@ import Experience from "./Experience"
 import { MathUtils } from "three"
 import { Leva } from "leva"
 import Chatbot from "./chat/Chatbot"
+import { Loader } from "@react-three/drei"
 // import GyroscopeComponent from "./test/GyroscopeComponent"
 
 
@@ -19,7 +20,8 @@ function App() {
 				<color args={['black']} attach={'background'}/>
 				<Experience/>
 			</Canvas>
-			<Leva collapsed/>
+			{/* <Leva collapsed/> */}
+			<Loader/>
 			<Chatbot/>
 			{/* <Chat/> */}
 		</>
