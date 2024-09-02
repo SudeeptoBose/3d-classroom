@@ -4,6 +4,7 @@ import { MathUtils } from "three"
 import { Leva } from "leva"
 import Chatbot from "./chat/Chatbot"
 import { Loader } from "@react-three/drei"
+import Footer from "./Footer"
 // import GyroscopeComponent from "./test/GyroscopeComponent"
 
 
@@ -23,7 +24,7 @@ function App() {
 			{/* <Leva collapsed/> */}
 			<Loader/>
 			<Chatbot/>
-			{/* <Chat/> */}
+			<Footer/>
 		</>
 	)
 }
